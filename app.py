@@ -114,8 +114,7 @@ def main():
         initial_sidebar_state="expanded",
     )
 
-    st.sidebar.title("Image Processing & Computer Vision Portfolio")
-    st.sidebar.markdown("**Sourish Musib**")
+    st.sidebar.title("Image Processing & Computer Vision Portfolio - Sourish")
     st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/)")
 
     MODULES = [
@@ -227,13 +226,6 @@ def main():
                 "image/png",
             )
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown(r"""
-            **Point Operations & Camera Auto-Exposure:**
-            - **Gamma Correction:** Camera sensors have a linear response ($I \propto \Phi$), whereas human vision approximates a logarithmic / power law ($\gamma \approx 2.2$). In hardware ISP pipelines, non-linear gamma curves are encoded as fast Look-Up Tables (LUTs) in digital signal processors.
-            - **CLAHE:** Standard global histogram equalization over-amplifies noise in homogeneous regions (e.g. night skies). Contrast Limited Adaptive Histogram Equalization (CLAHE) computes localized histograms across $8 \times 8$ tiles and clips gradient slopes, essential for low-light camera enhancement.
-            """)
-
     elif selected_module.startswith("2."):
         # Module 2: Color Space Exploration
         st.write("Color space decomposition (RGB, HSV, YCrCb, LAB) and Auto White Balance.")
@@ -276,13 +268,6 @@ def main():
             with awb_cols[1]:
                 st.image(awb_result, caption="After Gray-World White Balance", width="stretch")
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown("""
-            **Luma-Chroma Separation & Mobile Video Codecs:**
-            - Video compression codecs (H.264/HEVC/AV1) heavily rely on YCrCb/YUV 4:2:0 subsampling because the human visual system (HVS) possesses far greater spatial resolution for luminance ($Y$) than chrominance ($Cr, Cb$).
-            - AWB (Auto White Balance) is one of the foundational "3A" camera algorithms running on hardware camera ISPs, ensuring neutral white surfaces remain chromatic neutral regardless of warm tungsten ($2800K$) or cool daylight ($6500K$) lighting.
-            """)
-
     elif selected_module.startswith("3."):
         # Module 3: Spatial Filtering
         st.write("Convolution-based 2D filtering: smoothing, edge-preserving bilateral denoising, and unsharp masking.")
@@ -321,13 +306,6 @@ def main():
             st.image(processed, caption="Filtered Output", width="stretch")
             st.download_button("⬇ Download Result", get_image_download_bytes(processed), "filtered.png", "image/png")
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown("""
-            **2D Convolution Hardware Acceleration:**
-            - **Bilateral Filtering:** Unlike Gaussian blur, the bilateral filter weights neighborhood pixels by both geometric proximity and radiometric intensity difference. It smoothes flat noisy patches while preserving crisp object boundaries—vital for camera noise reduction blocks.
-            - **Edge Computing & DSPs:** Large 2D convolutions ($7 \times 7$ or separable $1 \times N$) are executed on embedded DSPs using vectorized SIMD instructions to achieve 60+ FPS processing with minimal power consumption.
-            """)
-
     elif selected_module.startswith("4."):
         # Module 4: Morphology
         st.write("Non-linear mathematical morphology: structuring elements, erosion, dilation, skeletonization, and object separation.")
@@ -355,13 +333,6 @@ def main():
             st.image(binary, caption="Binary Input Image", width="stretch")
         with colB:
             st.image(result, caption=f"Morphology Result: {op_name.capitalize()}", width="stretch")
-
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown(r"""
-            **Morphological Filters in Vision Pipelines:**
-            - **Opening & Closing:** Morphological opening ($\gamma_B(A) = (A \ominus B) \oplus B$) eliminates salt noise without changing area, while closing ($\phi_B(A) = (A \oplus B) \ominus B$) bridges hairline fractures and holes.
-            - **Distance Transform & Watershed:** Used in industrial inspection and automated cell/object counting where overlapping items fuse into single binary connected components.
-            """)
 
     elif selected_module.startswith("5."):
         # Module 5: Edge Detection
@@ -391,15 +362,6 @@ def main():
             st.image(current_img, caption="Original Image", width="stretch")
         with colB:
             st.image(edges, caption=f"Edge Map ({detector})", width="stretch")
-
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown("""
-            **The 4 Stages of Canny Edge Detection:**
-            1. **Gaussian Smoothing:** Suppress high-frequency sensor noise.
-            2. **Gradient Computation:** Sobel kernel convolution producing gradient magnitude and orientation angle $\theta = \arctan(G_y / G_x)$.
-            3. **Non-Maximum Suppression (NMS):** Thin blurred edges to 1-pixel wide ridges along gradient direction.
-            4. **Hysteresis Thresholding:** Retain strong edges ($> T_{\text{high}}$) and weak edges connected to strong ones, discarding noise ($< T_{\text{low}}$).
-            """)
 
     elif selected_module.startswith("6."):
         # Module 6: Fourier Transform
@@ -453,13 +415,6 @@ def main():
             hybrid = create_hybrid_image(gray, inverted_gray, cutoff_low=c_low, cutoff_high=c_high)
             st.image(hybrid, caption="Hybrid Synthesis Output", width="stretch")
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown(r"""
-            **2D DFT and Frequency-Domain DSPs:**
-            - **Convolution Theorem:** Spatial convolution corresponds to point-wise multiplication in the frequency domain: $\mathcal{F}\{f * h\} = \mathcal{F}\{f\} \cdot \mathcal{F}\{h\}$.
-            - For large spatial kernels ($> 15 \times 15$), computing convolution via FFT is significantly faster ($\mathcal{O}(N \log N)$ vs $\mathcal{O}(N^2)$), a standard DSP optimization technique in production embedded audio/image processing libraries.
-            """)
-
     elif selected_module.startswith("7."):
         # Module 7: Noise & Restoration
         st.write("Evaluate restoration algorithms against quantified metrics (PSNR, SSIM, MSE).")
@@ -493,14 +448,6 @@ def main():
             f"{metrics_restored['psnr']} dB",
             delta=f"+{round(metrics_restored['psnr'] - metrics_noisy['psnr'], 2)} dB",
         )
-
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown(r"""
-            **Objective Image Quality Assessment (IQA):**
-            - **PSNR (Peak Signal-to-Noise Ratio):** Measures logarithmic ratio between maximum pixel power and mean squared error:
-              $$\text{PSNR} = 10 \cdot \log_{10} \left( \frac{255^2}{\text{MSE}} \right)$$
-            - **SSIM (Structural Similarity Index):** Models perception based on luminance, contrast, and structural correlation. A higher PSNR/SSIM score directly dictates tuning parameters for mobile camera certification.
-            """)
 
     elif selected_module.startswith("8."):
         # Module 8: Thresholding & Segmentation
@@ -577,13 +524,6 @@ def main():
             match_vis, matches = match_features(current_img, transformed, detector_type=det_mode)
             st.image(match_vis, caption=f"Matches ({len(matches)} passing Lowe's ratio test)", width="stretch")
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown("""
-            **Mobile Feature Detectors:**
-            - **ORB vs SIFT:** While SIFT provides superior scale invariance, its floating-point 128D descriptors require heavy compute. ORB (Oriented FAST and Rotated BRIEF) employs binary descriptors (256 bits), allowing Hamming distance matching via ultra-fast CPU `POPCNT` (population count) bit operations.
-            - Widely used in Visual Odometry, AR/VR tracking on Snapdragon XR platforms, and SLAM.
-            """)
-
     elif selected_module.startswith("10."):
         # Module 10: Geometric Transforms
         st.write("Affine warping, 4-point document perspective rectification, and automated panorama stitching.")
@@ -659,13 +599,6 @@ def main():
             heatmap = generate_motion_heatmap(frames)
             st.image(heatmap, caption="Cumulative Temporal Motion Heatmap", width="stretch")
 
-        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
-            st.markdown("""
-            **Optical Flow & Video Stabilization:**
-            - **Farnebäck Method:** Approximates pixel neighborhoods by quadratic polynomial expansions, resolving per-pixel displacement vectors $(u, v)$.
-            - **EIS (Electronic Image Stabilization):** Mobile camera software tracks optical flow vectors across consecutive sensor frames to estimate 3D gyro camera jitter, warping frames in real-time to generate steady video.
-            """)
-
     elif selected_module.startswith("12."):
         # Module 12: Camera ISP Simulation
         st.write("Complete Hardware Camera Image Signal Processor (ISP) simulation pipeline.")
@@ -714,15 +647,6 @@ def main():
             "isp_output.png",
             "image/png",
         )
-
-        with st.expander("📖 Hardware Camera ISP Architecture Deep Dive"):
-            st.markdown("""
-            **Inside a Hardware Camera ISP:**
-            1. **CFA Demosaicing:** Color sensors place a Bayer mosaic color filter array (CFA) over photodiodes so each pixel records only one primary color (50% Green, 25% Red, 25% Blue). Debayering reconstructs missing chrominance.
-            2. **Black Level Calibration (BLC):** Sensors produce thermal dark-current voltage offsets even when zero light strikes the sensor. BLC subtracts this threshold.
-            3. **AWB & CCM:** 3A hardware algorithms balance channel gains, while a $3 \times 3$ Color Correction Matrix aligns raw camera primaries with standard rec.709 / sRGB color standards.
-            4. **Tone Mapping:** Gamma curves and local tone mapping compress 12-to-14 bit sensor RAW dynamic range down to 8-bit display standards without blowing out highlights or crushing shadows.
-            """)
 
 
 if __name__ == "__main__":

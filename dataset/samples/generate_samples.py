@@ -82,30 +82,7 @@ def generate_all_samples(out_dir="dataset/samples"):
         noisy[ry, rx] = 0
     cv2.imwrite(os.path.join(out_dir, "noisy_sample.png"), noisy)
 
-    # 5. text_doc.png (slanted text document with lighting gradient)
-    doc = np.full((500, 500, 3), 40, dtype=np.uint8)  # dark desk
-    paper = np.full((360, 280), 245, dtype=np.uint8)
-    # Add lighting gradient (darker at bottom-right)
-    for y in range(360):
-        for x in range(280):
-            paper[y, x] = max(0, min(255, int(paper[y, x] - (x * 0.2 + y * 0.15))))
-    # Draw simulated text lines
-    for ty in range(40, 330, 18):
-        cv2.line(paper, (30, ty), (250, ty), (30, 30, 30), 2)
-    # Draw title and logo block
-    cv2.rectangle(paper, (30, 15), (100, 30), (10, 10, 10), -1)
-    cv2.rectangle(paper, (180, 15), (250, 32), (100, 100, 100), -1)
-    # Warp paper into tilted perspective on desk
-    src_pts = np.float32([[0, 0], [280, 0], [280, 360], [0, 360]])
-    dst_pts = np.float32([[110, 70], [380, 95], [340, 440], [80, 390]])
-    M = cv2.getPerspectiveTransform(src_pts, dst_pts)
-    warped_paper = cv2.warpPerspective(paper, M, (500, 500))
-    mask = cv2.warpPerspective(np.ones_like(paper) * 255, M, (500, 500))
-    for c in range(3):
-        doc[:, :, c] = np.where(mask > 0, warped_paper, doc[:, :, c])
-    cv2.imwrite(os.path.join(out_dir, "text_doc.png"), doc)
-
-    # 6. raw_bayer.png (Simulated Bayer CFA pattern)
+    # 5. raw_bayer.png (Simulated Bayer CFA pattern)
     # Generate clean color scene (300x300x3) then sample RGGB
     scene = np.zeros((300, 300, 3), dtype=np.uint8)
     scene[:, :100] = (220, 50, 50)    # Red block
