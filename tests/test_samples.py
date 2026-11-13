@@ -3,6 +3,7 @@ import cv2
 import pytest
 
 EXPECTED_SAMPLES = [
+    "sourish.jpg",
     "cameraman.png",
     "coins.png",
     "building.png",

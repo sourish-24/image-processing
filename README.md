@@ -1,13 +1,15 @@
-# IPCV Portfolio — Classical Computer Vision & Camera ISP Toolkit
+# Image Processing & Computer Vision Portfolio — Sourish Musib
 
-A portfolio-grade classical image processing and computer vision toolkit built with **OpenCV**, **NumPy**, **SciPy**, and **Streamlit**. Designed to demonstrate mathematical mastery of image processing, spatial and frequency filtering, temporal video analytics, and hardware **Image Signal Processor (ISP)** pipeline design for embedded / mobile computer vision roles (such as Qualcomm Camera Software & Multimedia teams).
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/)
+
+A classical image processing and computer vision toolkit built with **OpenCV**, **NumPy**, **SciPy**, and **Streamlit**. Demonstrates mathematical foundations of spatial and frequency filtering, feature matching, multi-view geometry, temporal video analytics, and hardware **Image Signal Processor (ISP)** pipeline design.
 
 ---
 
-## 🌟 Key Highlights & Qualcomm Relevance
+## 🌟 Key Highlights & Engineering Depth
 
 * **Purely Classical (No Deep Learning):** Focuses on core deterministic signal processing, mathematical algorithms, and hardware-conscious edge compute patterns.
-* **Qualcomm Spectra Camera ISP Simulation (Module 12):** End-to-end hardware camera pipeline: raw Bayer CFA mosaic $\to$ Demosaicing $\to$ Black Level Calibration (BLC) $\to$ Auto White Balance (AWB) $\to$ Color Correction Matrix (CCM) $\to$ Tone Mapping Curve $\to$ HDR Exposure Fusion.
+* **Hardware Camera ISP Pipeline Simulation (Module 12):** End-to-end camera pipeline: raw Bayer CFA mosaic $\to$ Demosaicing $\to$ Black Level Calibration (BLC) $\to$ Auto White Balance (AWB) $\to$ Color Correction Matrix (CCM) $\to$ Tone Mapping Curve $\to$ HDR Exposure Fusion.
 * **Temporal Video Analytics (Module 11):** Farnebäck dense optical flow vector fields, MOG2/KNN background subtraction, and cumulative activity heatmaps.
 * **Frequency Domain & DSP (Module 6):** 2D Discrete Fourier Transform (DFT), Ideal/Gaussian/Butterworth low/high pass filtering, periodic noise notch rejection, and hybrid image synthesis.
 * **Quantitative Image Quality Assessment (Module 7):** Direct measurement of Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM) across sensor noise models.
@@ -29,7 +31,7 @@ A portfolio-grade classical image processing and computer vision toolkit built w
 | **Tier 3: Advanced** | **M08** | Segmentation & Contours | Adaptive Mean/Gaussian, Multi-Otsu, GrabCut GMM segmentation, Contour geometry |
 | | **M09** | Features & Keypoint Matching | Harris corner response $R$, ORB binary descriptors, SIFT, Lowe's ratio test matching |
 | | **M10** | Geometric Transforms | Affine transformation, 4-point perspective document scanner, Panorama stitching |
-| **Tier 4: Qualcomm-Level** | **M11** | Video Analytics & Motion | Frame differencing, MOG2 background subtraction, Farnebäck Dense Optical Flow |
+| **Tier 4: Production Video & ISP** | **M11** | Video Analytics & Motion | Frame differencing, MOG2 background subtraction, Farnebäck Dense Optical Flow |
 | | **M12** | Camera ISP Simulation | Bayer RGGB $\to$ Debayer $\to$ BLC $\to$ AWB $\to$ $3\times3$ CCM $\to$ sRGB Tone Curve $\to$ Mertens HDR |
 
 ---
@@ -62,7 +64,7 @@ Launch the Streamlit web dashboard:
 streamlit run app.py
 ```
 
-* **No images required to start:** The app comes pre-loaded with curated standard benchmark images (`cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `text_doc.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`) automatically configured for each module.
+* **Sample images pre-loaded:** Comes pre-loaded with sample images (`sourish.jpg`, `cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `text_doc.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`).
 * **Custom testing:** Toggle the sidebar to "Upload Custom Image" to test any custom photograph.
 * **Download outputs:** Every module includes a direct "Download Result" button.
 
@@ -112,7 +114,7 @@ IPCV/
 │   ├── test_tier2_morph_edges.py
 │   ├── test_tier2_fourier_noise.py
 │   ├── test_tier3_advanced.py
-│   ├── test_tier4_qualcomm.py
+│   ├── test_tier4_video_isp.py
 │   └── test_app_integration.py
 │
 ├── output_images/              # CLI detector output directories
@@ -126,21 +128,4 @@ IPCV/
 ├── object_detector_simple_rgb.py # Standalone CLI RGB detector
 ├── requirements.txt            # Project dependencies
 └── README.md                   # Project documentation
-```
-
----
-
-## 💡 Classical CLI Object Detectors (Legacy Workflows)
-
-You can still run the original CLI detectors from the command line:
-
-```powershell
-# 1. Mask-based connected component detection
-python object_detector_simple.py --mask dataset/synthetic/synthetic_001_mask.png
-
-# 2. RGB Otsu + Morphology detector
-python object_detector_simple_rgb.py --input dataset/synthetic/synthetic_039.png
-
-# 3. Canny & Contour Icon Grid detector
-python icon_grid_detector.py --input dataset/internet/random6.png
 ```

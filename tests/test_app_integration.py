@@ -9,6 +9,7 @@ def test_app_sample_mapping():
     sample_dir = os.path.join("dataset", "samples")
     assert os.path.isdir(sample_dir)
     samples = [
+        "sourish.jpg",
         "cameraman.png",
         "coins.png",
         "building.png",

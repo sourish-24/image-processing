@@ -108,13 +108,15 @@ def get_image_download_bytes(img: np.ndarray, fmt: str = "PNG") -> bytes:
 
 def main():
     st.set_page_config(
-        page_title="IPCV Portfolio — Classical Computer Vision & ISP Toolkit",
-        page_icon="📷",
+        page_title="Image Processing & Computer Vision Portfolio - Sourish",
+        page_icon="🖼️",
         layout="wide",
         initial_sidebar_state="expanded",
     )
 
-    st.sidebar.title("📷 IPCV Portfolio")
+    st.sidebar.title("Image Processing & Computer Vision Portfolio")
+    st.sidebar.markdown("**Sourish Musib**")
+    st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/)")
     st.sidebar.caption("Classical Computer Vision & Camera ISP Toolkit")
 
     MODULES = [
@@ -129,16 +131,16 @@ def main():
         "9. Feature Detection & Matching (Harris, ORB, SIFT)",
         "10. Geometric Transforms & Panorama Stitching",
         "11. Video Processing & Optical Flow",
-        "12. Camera ISP Pipeline (Spectra Simulation)",
+        "12. Camera ISP Pipeline Simulation",
     ]
 
     selected_module = st.sidebar.selectbox("Select Domain Module", MODULES)
 
     # Map each module to recommended sample images
     SAMPLE_MAPPINGS = {
-        "1. Point Operations & Histograms": "cameraman.png",
-        "2. Color Space Exploration": "building.png",
-        "3. Spatial Filtering & Convolution": "cameraman.png",
+        "1. Point Operations & Histograms": "sourish.jpg",
+        "2. Color Space Exploration": "sourish.jpg",
+        "3. Spatial Filtering & Convolution": "sourish.jpg",
         "4. Morphological Operations": "coins.png",
         "5. Edge Detection (Sobel → Canny → LoG)": "building.png",
         "6. 2D Fourier Transform & Frequency Filtering": "cameraman.png",
@@ -147,19 +149,20 @@ def main():
         "9. Feature Detection & Matching (Harris, ORB, SIFT)": "building.png",
         "10. Geometric Transforms & Panorama Stitching": "panorama_left.png",
         "11. Video Processing & Optical Flow": "cameraman.png",
-        "12. Camera ISP Pipeline (Spectra Simulation)": "raw_bayer.png",
+        "12. Camera ISP Pipeline Simulation": "raw_bayer.png",
     }
 
     st.sidebar.markdown("---")
     st.sidebar.subheader("Image Source")
     img_source = st.sidebar.radio("Input Mode", ["Preset Sample Image", "Upload Custom Image"])
 
-    default_sample = SAMPLE_MAPPINGS.get(selected_module, "cameraman.png")
+    default_sample = SAMPLE_MAPPINGS.get(selected_module, "sourish.jpg")
     uploaded_file = None
     sample_choice = default_sample
 
     if img_source == "Preset Sample Image":
         available_samples = [
+            "sourish.jpg",
             "cameraman.png",
             "coins.png",
             "building.png",
@@ -226,7 +229,7 @@ def main():
                 "image/png",
             )
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown(r"""
             **Point Operations & Camera Auto-Exposure:**
             - **Gamma Correction:** Camera sensors have a linear response ($I \propto \Phi$), whereas human vision approximates a logarithmic / power law ($\gamma \approx 2.2$). In hardware ISP pipelines, non-linear gamma curves are encoded as fast Look-Up Tables (LUTs) in digital signal processors.
@@ -275,11 +278,11 @@ def main():
             with awb_cols[1]:
                 st.image(awb_result, caption="After Gray-World White Balance", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown("""
             **Luma-Chroma Separation & Mobile Video Codecs:**
             - Video compression codecs (H.264/HEVC/AV1) heavily rely on YCrCb/YUV 4:2:0 subsampling because the human visual system (HVS) possesses far greater spatial resolution for luminance ($Y$) than chrominance ($Cr, Cb$).
-            - AWB (Auto White Balance) is one of the foundational "3A" camera algorithms running on Qualcomm Spectra ISP, ensuring neutral white surfaces remain chromatic neutral regardless of warm tungsten ($2800K$) or cool daylight ($6500K$) lighting.
+            - AWB (Auto White Balance) is one of the foundational "3A" camera algorithms running on hardware camera ISPs, ensuring neutral white surfaces remain chromatic neutral regardless of warm tungsten ($2800K$) or cool daylight ($6500K$) lighting.
             """)
 
     elif selected_module.startswith("3."):
@@ -320,11 +323,11 @@ def main():
             st.image(processed, caption="Filtered Output", width="stretch")
             st.download_button("⬇ Download Result", get_image_download_bytes(processed), "filtered.png", "image/png")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown("""
             **2D Convolution Hardware Acceleration:**
             - **Bilateral Filtering:** Unlike Gaussian blur, the bilateral filter weights neighborhood pixels by both geometric proximity and radiometric intensity difference. It smoothes flat noisy patches while preserving crisp object boundaries—vital for camera noise reduction blocks.
-            - **Edge Computing & DSPs:** Large 2D convolutions ($7 \times 7$ or separable $1 \times N$) are executed on Qualcomm Hexagon DSPs using vectorized SIMD (HVX) instructions to achieve 60+ FPS processing with minimal battery drain.
+            - **Edge Computing & DSPs:** Large 2D convolutions ($7 \times 7$ or separable $1 \times N$) are executed on embedded DSPs using vectorized SIMD instructions to achieve 60+ FPS processing with minimal power consumption.
             """)
 
     elif selected_module.startswith("4."):
@@ -355,7 +358,7 @@ def main():
         with colB:
             st.image(result, caption=f"Morphology Result: {op_name.capitalize()}", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown(r"""
             **Morphological Filters in Vision Pipelines:**
             - **Opening & Closing:** Morphological opening ($\gamma_B(A) = (A \ominus B) \oplus B$) eliminates salt noise without changing area, while closing ($\phi_B(A) = (A \oplus B) \ominus B$) bridges hairline fractures and holes.
@@ -391,7 +394,7 @@ def main():
         with colB:
             st.image(edges, caption=f"Edge Map ({detector})", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown("""
             **The 4 Stages of Canny Edge Detection:**
             1. **Gaussian Smoothing:** Suppress high-frequency sensor noise.
@@ -452,11 +455,11 @@ def main():
             hybrid = create_hybrid_image(gray, inverted_gray, cutoff_low=c_low, cutoff_high=c_high)
             st.image(hybrid, caption="Hybrid Synthesis Output", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown(r"""
             **2D DFT and Frequency-Domain DSPs:**
             - **Convolution Theorem:** Spatial convolution corresponds to point-wise multiplication in the frequency domain: $\mathcal{F}\{f * h\} = \mathcal{F}\{f\} \cdot \mathcal{F}\{h\}$.
-            - For large spatial kernels ($> 15 \times 15$), computing convolution via FFT is significantly faster ($\mathcal{O}(N \log N)$ vs $\mathcal{O}(N^2)$), a standard DSP optimization technique in Qualcomm Hexagon audio/image processing libraries.
+            - For large spatial kernels ($> 15 \times 15$), computing convolution via FFT is significantly faster ($\mathcal{O}(N \log N)$ vs $\mathcal{O}(N^2)$), a standard DSP optimization technique in production embedded audio/image processing libraries.
             """)
 
     elif selected_module.startswith("7."):
@@ -493,7 +496,7 @@ def main():
             delta=f"+{round(metrics_restored['psnr'] - metrics_noisy['psnr'], 2)} dB",
         )
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown(r"""
             **Objective Image Quality Assessment (IQA):**
             - **PSNR (Peak Signal-to-Noise Ratio):** Measures logarithmic ratio between maximum pixel power and mean squared error:
@@ -576,7 +579,7 @@ def main():
             match_vis, matches = match_features(current_img, transformed, detector_type=det_mode)
             st.image(match_vis, caption=f"Matches ({len(matches)} passing Lowe's ratio test)", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown("""
             **Mobile Feature Detectors:**
             - **ORB vs SIFT:** While SIFT provides superior scale invariance, its floating-point 128D descriptors require heavy compute. ORB (Oriented FAST and Rotated BRIEF) employs binary descriptors (256 bits), allowing Hamming distance matching via ultra-fast CPU `POPCNT` (population count) bit operations.
@@ -658,7 +661,7 @@ def main():
             heatmap = generate_motion_heatmap(frames)
             st.image(heatmap, caption="Cumulative Temporal Motion Heatmap", width="stretch")
 
-        with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
+        with st.expander("📖 Algorithmic Deep Dive & Mathematical Foundations"):
             st.markdown("""
             **Optical Flow & Video Stabilization:**
             - **Farnebäck Method:** Approximates pixel neighborhoods by quadratic polynomial expansions, resolving per-pixel displacement vectors $(u, v)$.
@@ -714,9 +717,9 @@ def main():
             "image/png",
         )
 
-        with st.expander("📖 Qualcomm Spectra ISP Architecture Deep Dive"):
+        with st.expander("📖 Hardware Camera ISP Architecture Deep Dive"):
             st.markdown("""
-            **Inside the Qualcomm Spectra ISP:**
+            **Inside a Hardware Camera ISP:**
             1. **CFA Demosaicing:** Color sensors place a Bayer mosaic color filter array (CFA) over photodiodes so each pixel records only one primary color (50% Green, 25% Red, 25% Blue). Debayering reconstructs missing chrominance.
             2. **Black Level Calibration (BLC):** Sensors produce thermal dark-current voltage offsets even when zero light strikes the sensor. BLC subtracts this threshold.
             3. **AWB & CCM:** 3A hardware algorithms balance channel gains, while a $3 \times 3$ Color Correction Matrix aligns raw camera primaries with standard rec.709 / sRGB color standards.
