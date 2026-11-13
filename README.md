@@ -1,6 +1,6 @@
 # Image Processing & Computer Vision Portfolio — Sourish Musib
 
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/sourish-24/image-processing)
 
 A classical image processing and computer vision toolkit built with **OpenCV**, **NumPy**, **SciPy**, and **Streamlit**. Demonstrates mathematical foundations of spatial and frequency filtering, feature matching, multi-view geometry, temporal video analytics, and hardware **Image Signal Processor (ISP)** pipeline design.
 
@@ -13,7 +13,7 @@ A classical image processing and computer vision toolkit built with **OpenCV**, 
 * **Temporal Video Analytics (Module 11):** Farnebäck dense optical flow vector fields, MOG2/KNN background subtraction, and cumulative activity heatmaps.
 * **Frequency Domain & DSP (Module 6):** 2D Discrete Fourier Transform (DFT), Ideal/Gaussian/Butterworth low/high pass filtering, periodic noise notch rejection, and hybrid image synthesis.
 * **Quantitative Image Quality Assessment (Module 7):** Direct measurement of Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM) across sensor noise models.
-* **Interactive Web Application (`app.py`):** Multi-module Streamlit interface with preset sample images, live parameter sliders, side-by-side visualization, and mathematical theory expanders.
+* **Interactive Web Application (`app.py`):** Multi-module Streamlit interface with preset sample images, live parameter sliders, side-by-side visualization, and concise algorithmic overviews.
 
 ---
 
