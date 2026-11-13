@@ -119,7 +119,6 @@ IPCV/
 │
 ├── .streamlit/                 # Web app theme & server config
 ├── app.py                      # Interactive Streamlit Web Application
-├── packages.txt                # Linux OS packages for cloud deployment
 ├── requirements.txt            # Python dependencies
 └── README.md                   # Project documentation
 ```
