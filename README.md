@@ -64,7 +64,7 @@ Launch the Streamlit web dashboard:
 streamlit run app.py
 ```
 
-* **Sample images pre-loaded:** Comes pre-loaded with sample images (`sourish.jpg`, `cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `text_doc.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`).
+* **Sample images pre-loaded:** Comes pre-loaded with sample images (`sourish.jpg`, `cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`).
 * **Custom testing:** Toggle the sidebar to "Upload Custom Image" to test any custom photograph.
 * **Download outputs:** Every module includes a direct "Download Result" button.
 

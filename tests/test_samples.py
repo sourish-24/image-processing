@@ -8,7 +8,6 @@ EXPECTED_SAMPLES = [
     "coins.png",
     "building.png",
     "noisy_sample.png",
-    "text_doc.png",
     "raw_bayer.png",
     "panorama_left.png",
     "panorama_right.png",
