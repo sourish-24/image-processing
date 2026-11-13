@@ -10,3 +10,12 @@ __pycache__/
 # OS artifacts
 .DS_Store
 Thumbs.db
+
+# Test cache
+.pytest_cache/
+
+# Output images (generated at runtime)
+output_images/
+
+# Internal planning docs
+docs/

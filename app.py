@@ -116,7 +116,7 @@ def main():
 
     st.sidebar.title("Image Processing & Computer Vision Portfolio")
     st.sidebar.markdown("**Sourish Musib**")
-    st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/)")
+    st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/sourish-24/image-processing)")
 
     MODULES = [
         "1. Point Operations & Histograms",
