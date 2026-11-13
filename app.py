@@ -117,7 +117,6 @@ def main():
     st.sidebar.title("Image Processing & Computer Vision Portfolio")
     st.sidebar.markdown("**Sourish Musib**")
     st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/)")
-    st.sidebar.caption("Classical Computer Vision & Camera ISP Toolkit")
 
     MODULES = [
         "1. Point Operations & Histograms",
