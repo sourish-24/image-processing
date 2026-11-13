@@ -114,7 +114,8 @@ def main():
         initial_sidebar_state="expanded",
     )
 
-    st.sidebar.title("Image Processing & Computer Vision Portfolio - Sourish")
+    st.sidebar.title("Image Processing & Computer Vision Portfolio")
+    st.sidebar.markdown("**Sourish Musib**")
     st.sidebar.markdown("[🔗 GitHub Repository](https://github.com/)")
 
     MODULES = [
@@ -186,7 +187,10 @@ def main():
 
     if selected_module.startswith("1."):
         # Module 1: Point Operations
-        st.write("Pixel-level non-linear transformations, gamma correction, and histogram equalization.")
+        st.markdown(
+            "Adjust pixel intensities directly using brightness, contrast, and non-linear gamma curves, "
+            "or enhance dynamic range with global histogram equalization and localized CLAHE."
+        )
         c1, c2, c3 = st.columns(3)
         with c1:
             brightness = st.slider("Brightness Offset", -100, 100, 0)
@@ -228,7 +232,10 @@ def main():
 
     elif selected_module.startswith("2."):
         # Module 2: Color Space Exploration
-        st.write("Color space decomposition (RGB, HSV, YCrCb, LAB) and Auto White Balance.")
+        st.markdown(
+            "Explore different color representations like RGB, HSV, YCrCb, and LAB. "
+            "Isolate specific color ranges using hue masks and balance lighting temperature with Gray-World Auto White Balance."
+        )
         color_space = st.selectbox("Target Color Space Representation", ["RGB", "HSV", "YCrCb", "LAB", "GRAY"])
         converted = convert_color_space(current_img, color_space)
 
@@ -270,7 +277,10 @@ def main():
 
     elif selected_module.startswith("3."):
         # Module 3: Spatial Filtering
-        st.write("Convolution-based 2D filtering: smoothing, edge-preserving bilateral denoising, and unsharp masking.")
+        st.markdown(
+            "Apply 2D spatial convolution kernels to blur noise, sharpen fine details with unsharp masking, "
+            "preserve sharp edges with bilateral filtering, or test custom convolution matrices."
+        )
         f_mode = st.radio("Filter Type", ["Standard Blur", "Bilateral Filter", "Sharpen (Unsharp Mask)", "Custom Convolution Kernel"])
 
         if f_mode == "Standard Blur":
@@ -308,7 +318,10 @@ def main():
 
     elif selected_module.startswith("4."):
         # Module 4: Morphology
-        st.write("Non-linear mathematical morphology: structuring elements, erosion, dilation, skeletonization, and object separation.")
+        st.markdown(
+            "Apply morphological transformations using structuring elements to clean binary shapes, "
+            "extract skeletons, fill gaps, or separate overlapping objects using distance transform watershed."
+        )
         gray_input = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
         _, binary = cv2.threshold(gray_input, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
@@ -336,7 +349,10 @@ def main():
 
     elif selected_module.startswith("5."):
         # Module 5: Edge Detection
-        st.write("Gradient operators and the multi-stage Canny edge detector.")
+        st.markdown(
+            "Detect object boundaries and intensity gradients across the image using "
+            "first-order Sobel operators, second-order Laplacians, and multi-stage Canny hysteresis edge detection."
+        )
         gray = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
         detector = st.selectbox("Edge Detector", ["Canny", "Sobel (Combined)", "Sobel X", "Sobel Y", "Laplacian", "Laplacian of Gaussian (LoG)"])
 
@@ -365,7 +381,10 @@ def main():
 
     elif selected_module.startswith("6."):
         # Module 6: Fourier Transform
-        st.write("Frequency domain analysis using the 2D Discrete Fourier Transform (DFT).")
+        st.markdown(
+            "Decompose images into their frequency components using the 2D Fast Fourier Transform (FFT). "
+            "Filter high or low frequencies, remove periodic interference with notch filters, or blend frequencies into hybrid images."
+        )
         gray = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
         dft_shift, mag_spec = compute_fft2(gray)
 
@@ -417,7 +436,10 @@ def main():
 
     elif selected_module.startswith("7."):
         # Module 7: Noise & Restoration
-        st.write("Evaluate restoration algorithms against quantified metrics (PSNR, SSIM, MSE).")
+        st.markdown(
+            "Inject realistic noise models (Gaussian, Salt & Pepper, Speckle) and restore images with spatial filters "
+            "and Non-Local Means (NLM), comparing results with PSNR and SSIM quality metrics."
+        )
         ntype = st.selectbox("Noise Type to Inject", ["gaussian", "salt_pepper", "speckle"])
         if ntype == "gaussian":
             std = st.slider(r"Noise Std ($\sigma$)", 5.0, 60.0, 25.0)
@@ -451,7 +473,10 @@ def main():
 
     elif selected_module.startswith("8."):
         # Module 8: Thresholding & Segmentation
-        st.write("Advanced binarization, multi-Otsu, GrabCut, and geometric contour analysis.")
+        st.markdown(
+            "Segment images into foreground and background using adaptive thresholding, multi-level Otsu clustering, "
+            "Gaussian mixture GrabCut extraction, and geometric contour profiling."
+        )
         seg_tab1, seg_tab2, seg_tab3 = st.tabs(["Adaptive & Multi-Otsu", "Contour Geometric Analyzer", "GrabCut Segmentation"])
         gray = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
 
@@ -501,7 +526,10 @@ def main():
 
     elif selected_module.startswith("9."):
         # Module 9: Features
-        st.write("Scale and rotation invariant local feature keypoints and descriptor matching.")
+        st.markdown(
+            "Detect salient interest points and corners with Harris, ORB, and SIFT, and verify robustness "
+            "by matching feature descriptors across rotated and shifted image pairs."
+        )
         gray = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
         det_mode = st.selectbox("Feature Extractor", ["ORB", "SIFT", "Harris Corners", "FAST"])
 
@@ -526,7 +554,10 @@ def main():
 
     elif selected_module.startswith("10."):
         # Module 10: Geometric Transforms
-        st.write("Affine warping, 4-point document perspective rectification, and automated panorama stitching.")
+        st.markdown(
+            "Transform image geometry with affine rotations, translations, and scaling, straighten tilted documents "
+            "with 4-point perspective homography, or stitch overlapping scenes into a panorama."
+        )
         trans_tab1, trans_tab2, trans_tab3 = st.tabs(["Affine Transformation", "Document Scanner (Perspective)", "Panorama Stitcher"])
 
         with trans_tab1:
@@ -572,7 +603,10 @@ def main():
 
     elif selected_module.startswith("11."):
         # Module 11: Video Processing
-        st.write("Temporal video analysis: frame differencing, background subtraction, and dense optical flow.")
+        st.markdown(
+            "Analyze motion across consecutive frames using Farnebäck dense optical flow vector fields, "
+            "MOG2 background subtraction masks, and cumulative temporal heatmaps."
+        )
         # Synthesize a moving sequence from current image
         h, w = current_img.shape[:2]
         gray = cv2.cvtColor(current_img, cv2.COLOR_RGB2GRAY)
@@ -601,7 +635,10 @@ def main():
 
     elif selected_module.startswith("12."):
         # Module 12: Camera ISP Simulation
-        st.write("Complete Hardware Camera Image Signal Processor (ISP) simulation pipeline.")
+        st.markdown(
+            "Simulate the end-to-end processing pipeline of a digital camera sensor: Bayer color filter demosaicing, "
+            "black level subtraction, auto white balance, color correction matrix (CCM), and tone curve mapping."
+        )
         bayer_mode = st.selectbox("Sensor CFA Layout", ["RGGB", "BGGR"])
         black_level = st.slider("Black Level Sensor Calibration (BLC)", 0, 64, 16)
         awb_method = st.selectbox("Auto White Balance Mode", ["gray_world", "perfect_reflector"])
