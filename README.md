@@ -1,19 +1,72 @@
 # Image Processing & Computer Vision Portfolio — Sourish Musib
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)](https://image-processing-sourish.streamlit.app)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/sourish-24/image-processing)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
+[![Tests](https://img.shields.io/badge/Tests-51%20Passed-brightgreen?style=for-the-badge)](https://github.com/sourish-24/image-processing)
 
-A classical image processing and computer vision toolkit built with **OpenCV**, **NumPy**, **SciPy**, and **Streamlit**. Demonstrates mathematical foundations of spatial and frequency filtering, feature matching, multi-view geometry, temporal video analytics, and hardware **Image Signal Processor (ISP)** pipeline design.
+A comprehensive classical image processing and computer vision toolkit engineered with **OpenCV**, **NumPy**, **SciPy**, and **Streamlit**. Demonstrates mathematical foundations of spatial and frequency filtering, feature matching, multi-view geometry, temporal video analytics, and hardware **Image Signal Processor (ISP)** pipeline design.
+
+🔗 **Live Web Application:** [image-processing-sourish.streamlit.app](https://image-processing-sourish.streamlit.app)
 
 ---
 
-## 🌟 Key Highlights & Engineering Depth
+## 🌟 Visual Transformations & Algorithm Showcases
 
-* **Purely Classical (No Deep Learning):** Focuses on core deterministic signal processing, mathematical algorithms, and hardware-conscious edge compute patterns.
-* **Hardware Camera ISP Pipeline Simulation (Module 12):** End-to-end camera pipeline: raw Bayer CFA mosaic $\to$ Demosaicing $\to$ Black Level Calibration (BLC) $\to$ Auto White Balance (AWB) $\to$ Color Correction Matrix (CCM) $\to$ Tone Mapping Curve $\to$ HDR Exposure Fusion.
-* **Temporal Video Analytics (Module 11):** Farnebäck dense optical flow vector fields, MOG2/KNN background subtraction, and cumulative activity heatmaps.
-* **Frequency Domain & DSP (Module 6):** 2D Discrete Fourier Transform (DFT), Ideal/Gaussian/Butterworth low/high pass filtering, periodic noise notch rejection, and hybrid image synthesis.
-* **Quantitative Image Quality Assessment (Module 7):** Direct measurement of Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM) across sensor noise models.
-* **Interactive Web Application (`app.py`):** Multi-module Streamlit interface with preset sample images, live parameter sliders, side-by-side visualization, and concise algorithmic overviews.
+### 1. Hardware Camera ISP Pipeline Simulation
+Simulates the silicon signal processing pipeline inside a digital camera sensor: raw Bayer mosaic readout $\to$ Bilinear Demosaicing $\to$ Black Level Calibration (BLC) $\to$ Gray-World Auto White Balance (AWB) $\to$ Color Correction Matrix (CCM) $\to$ Tone Curve Mapping.
+
+![Camera ISP Pipeline Simulation](assets/demo_isp_pipeline.png)
+
+---
+
+### 2. 2D Fourier Transform (FFT) & Frequency-Domain Filtering
+Computes the 2D Discrete Fourier Transform (DFT), analyzes centralized frequency distribution on a logarithmic scale, and applies 2nd-order Butterworth high-pass filters to isolate edge boundaries in the frequency domain.
+
+![2D Fourier Transform & Filtering](assets/demo_frequency_fft.png)
+
+---
+
+### 3. Invariant Feature Matching under Transformation
+Extracts scale- and rotation-invariant keypoints using ORB / SIFT, generates binary feature descriptors, and computes correspondence matches across rotated and scaled scenes using Lowe's ratio test ($\text{ratio} < 0.75$).
+
+![Feature Detection & Keypoint Matching](assets/demo_feature_matching.png)
+
+---
+
+### 4. Multi-Stage Edge Detection
+Comparison of first-order gradient operators (Sobel $G = \sqrt{G_x^2 + G_y^2}$), Laplacian second-order derivatives, Laplacian of Gaussian (LoG), and multi-stage Canny hysteresis edge thinning.
+
+![Multi-Stage Edge Detection](assets/demo_edge_detection.png)
+
+---
+
+### 5. Mathematical Morphology & Watershed Segmentation
+Applies morphological structuring elements to separate touching binary objects. Computes Euclidean distance transforms to identify marker peaks, followed by watershed flooding to isolate overlapping regions.
+
+![Morphological Watershed Segmentation](assets/demo_morphology_watershed.png)
+
+---
+
+### 6. Point Operations & Contrast Equalization (CLAHE)
+Dynamic range enhancement demonstrating non-linear power-law gamma transfer curves ($\gamma = 1.6$), Contrast Limited Adaptive Histogram Equalization (CLAHE) with localized tile clipping, and bilateral edge-preserving smoothing.
+
+![Point Operations & CLAHE Enhancement](assets/demo_enhancement.jpg)
+
+---
+
+### 7. Noise Models & Image Restoration with PSNR / SSIM
+Realistic sensor noise modeling (Gaussian, Salt & Pepper, Speckle) and restoration via Non-Local Means (NLM) and bilateral filters, evaluated with Peak Signal-to-Noise Ratio (PSNR) and Structural Similarity Index (SSIM).
+
+![Noise Injection and NLM Restoration](assets/demo_denoising_restoration.jpg)
+
+---
+
+### 8. Temporal Video Analytics & Dense Optical Flow
+Frame-by-frame temporal motion analysis computing dense optical flow vector fields via the Farnebäck quadratic polynomial approximation, visualizing displacement direction and velocity using HSV color mapping.
+
+![Dense Optical Flow](assets/demo_optical_flow.png)
 
 ---
 
@@ -59,12 +112,12 @@ pip install -r requirements.txt
 
 ## 🚀 Running the Interactive Application
 
-Launch the Streamlit web dashboard:
+Launch the Streamlit web dashboard locally:
 ```powershell
 streamlit run app.py
 ```
 
-* **Sample images pre-loaded:** Comes pre-loaded with sample images (`sourish.jpg`, `cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`).
+* **Sample images pre-loaded:** Comes pre-loaded with curated benchmark images (`sourish.jpg`, `cameraman.png`, `coins.png`, `building.png`, `noisy_sample.png`, `raw_bayer.png`, `panorama_left.png`, `panorama_right.png`).
 * **Custom testing:** Toggle the sidebar to "Upload Custom Image" to test any custom photograph.
 * **Download outputs:** Every module includes a direct "Download Result" button.
 
@@ -79,7 +132,7 @@ pytest tests/ -v
 ```
 
 ```text
-============================= 51 passed in 4.62s ==============================
+============================= 51 passed in 3.15s ==============================
 ```
 
 ---
@@ -88,7 +141,17 @@ pytest tests/ -v
 
 ```text
 IPCV/
-├── .venv/                      # Python virtual environment (git ignored)
+├── .streamlit/                 # Web app theme & server config
+├── assets/                     # Visual demonstration figures for README
+│   ├── demo_isp_pipeline.png
+│   ├── demo_frequency_fft.png
+│   ├── demo_feature_matching.png
+│   ├── demo_edge_detection.png
+│   ├── demo_morphology_watershed.png
+│   ├── demo_enhancement.jpg
+│   ├── demo_denoising_restoration.jpg
+│   └── demo_optical_flow.png
+│
 ├── dataset/                    # Image datasets
 │   ├── samples/                # Curated benchmark images & sample generator
 │   ├── synthetic/              # 40 synthetic geometric shapes & binary masks
@@ -109,15 +172,6 @@ IPCV/
 │   └── m12_isp_pipeline.py     # Module 12: Camera ISP Pipeline Simulation
 │
 ├── tests/                      # Pytest test suite (51 test cases)
-│   ├── test_samples.py
-│   ├── test_tier1_foundations.py
-│   ├── test_tier2_morph_edges.py
-│   ├── test_tier2_fourier_noise.py
-│   ├── test_tier3_advanced.py
-│   ├── test_tier4_video_isp.py
-│   └── test_app_integration.py
-│
-├── .streamlit/                 # Web app theme & server config
 ├── app.py                      # Interactive Streamlit Web Application
 ├── requirements.txt            # Python dependencies
 └── README.md                   # Project documentation
