@@ -211,12 +211,12 @@ def main():
         colA, colB = st.columns(2)
         with colA:
             st.subheader("Original Image")
-            st.image(current_img, use_container_width=True)
+            st.image(current_img, width="stretch")
             hist_orig = compute_histogram(current_img)
             st.line_chart(hist_orig)
         with colB:
             st.subheader("Processed Image")
-            st.image(processed, use_container_width=True)
+            st.image(processed, width="stretch")
             hist_proc = compute_histogram(processed)
             st.line_chart(hist_proc)
             st.download_button(
@@ -243,16 +243,16 @@ def main():
         with tab1:
             colA, colB = st.columns(2)
             with colA:
-                st.image(current_img, caption="Original RGB", use_container_width=True)
+                st.image(current_img, caption="Original RGB", width="stretch")
             with colB:
-                st.image(converted, caption=f"Converted: {color_space}", use_container_width=True)
+                st.image(converted, caption=f"Converted: {color_space}", width="stretch")
 
             channels = split_channels(converted)
             st.write(f"Individual {color_space} Channels:")
             c_cols = st.columns(len(channels))
             for idx, (col_widget, ch_data) in enumerate(zip(c_cols, channels)):
                 with col_widget:
-                    st.image(ch_data, caption=f"Channel {idx + 1}", use_container_width=True)
+                    st.image(ch_data, caption=f"Channel {idx + 1}", width="stretch")
 
         with tab2:
             st.write("Filter an object based on its Hue, Saturation, and Value range:")
@@ -262,18 +262,18 @@ def main():
             mask, isolated = isolate_color_hsv(current_img, (h_low, s_low, v_low), (h_high, s_high, v_high))
             iso_cols = st.columns(2)
             with iso_cols[0]:
-                st.image(mask, caption="Binary HSV Mask", use_container_width=True)
+                st.image(mask, caption="Binary HSV Mask", width="stretch")
             with iso_cols[1]:
-                st.image(isolated, caption="Isolated Color Segment", use_container_width=True)
+                st.image(isolated, caption="Isolated Color Segment", width="stretch")
 
         with tab3:
             st.write("Hardware ISP Auto White Balance (AWB) using the Gray-World illuminant estimator:")
             awb_result = gray_world_white_balance(current_img)
             awb_cols = st.columns(2)
             with awb_cols[0]:
-                st.image(current_img, caption="Before White Balance", use_container_width=True)
+                st.image(current_img, caption="Before White Balance", width="stretch")
             with awb_cols[1]:
-                st.image(awb_result, caption="After Gray-World White Balance", use_container_width=True)
+                st.image(awb_result, caption="After Gray-World White Balance", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown("""
@@ -315,9 +315,9 @@ def main():
 
         colA, colB = st.columns(2)
         with colA:
-            st.image(current_img, caption="Original Image", use_container_width=True)
+            st.image(current_img, caption="Original Image", width="stretch")
         with colB:
-            st.image(processed, caption="Filtered Output", use_container_width=True)
+            st.image(processed, caption="Filtered Output", width="stretch")
             st.download_button("⬇ Download Result", get_image_download_bytes(processed), "filtered.png", "image/png")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
@@ -351,9 +351,9 @@ def main():
 
         colA, colB = st.columns(2)
         with colA:
-            st.image(binary, caption="Binary Input Image", use_container_width=True)
+            st.image(binary, caption="Binary Input Image", width="stretch")
         with colB:
-            st.image(result, caption=f"Morphology Result: {op_name.capitalize()}", use_container_width=True)
+            st.image(result, caption=f"Morphology Result: {op_name.capitalize()}", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown(r"""
@@ -387,9 +387,9 @@ def main():
 
         colA, colB = st.columns(2)
         with colA:
-            st.image(current_img, caption="Original Image", use_container_width=True)
+            st.image(current_img, caption="Original Image", width="stretch")
         with colB:
-            st.image(edges, caption=f"Edge Map ({detector})", use_container_width=True)
+            st.image(edges, caption=f"Edge Map ({detector})", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown("""
@@ -416,11 +416,11 @@ def main():
 
             colA, colB, colC = st.columns(3)
             with colA:
-                st.image(gray, caption="Spatial Domain", use_container_width=True)
+                st.image(gray, caption="Spatial Domain", width="stretch")
             with colB:
-                st.image(mag_spec, caption="FFT Magnitude Spectrum (Log Scaled)", use_container_width=True)
+                st.image(mag_spec, caption="FFT Magnitude Spectrum (Log Scaled)", width="stretch")
             with colC:
-                st.image(filtered, caption=f"Reconstructed: {f_type}", use_container_width=True)
+                st.image(filtered, caption=f"Reconstructed: {f_type}", width="stretch")
 
         elif task_mode == "Periodic Noise Removal (Notch Filter)":
             st.write("Simulating periodic noise (e.g. electrical interference from power lines or sensor clock jitter):")
@@ -438,11 +438,11 @@ def main():
 
             c1, c2, c3 = st.columns(3)
             with c1:
-                st.image(corrupted, caption="Corrupted with Periodic Noise", use_container_width=True)
+                st.image(corrupted, caption="Corrupted with Periodic Noise", width="stretch")
             with c2:
-                st.image(noisy_mag, caption="Spectrum with Noise Spikes", use_container_width=True)
+                st.image(noisy_mag, caption="Spectrum with Noise Spikes", width="stretch")
             with c3:
-                st.image(restored, caption="Notch Filter Restored", use_container_width=True)
+                st.image(restored, caption="Notch Filter Restored", width="stretch")
 
         else:
             st.write("Combines low frequencies of Image A with high frequencies of Image B:")
@@ -450,7 +450,7 @@ def main():
             c_low = st.slider("Low Cutoff", 5.0, 50.0, 20.0)
             c_high = st.slider("High Cutoff", 20.0, 100.0, 45.0)
             hybrid = create_hybrid_image(gray, inverted_gray, cutoff_low=c_low, cutoff_high=c_high)
-            st.image(hybrid, caption="Hybrid Synthesis Output", use_container_width=True)
+            st.image(hybrid, caption="Hybrid Synthesis Output", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown(r"""
@@ -481,11 +481,11 @@ def main():
 
         colA, colB, colC = st.columns(3)
         with colA:
-            st.image(current_img, caption="Ground Truth", use_container_width=True)
+            st.image(current_img, caption="Ground Truth", width="stretch")
         with colB:
-            st.image(noisy, caption=f"Noisy (PSNR: {metrics_noisy['psnr']} dB | SSIM: {metrics_noisy['ssim']})", use_container_width=True)
+            st.image(noisy, caption=f"Noisy (PSNR: {metrics_noisy['psnr']} dB | SSIM: {metrics_noisy['ssim']})", width="stretch")
         with colC:
-            st.image(restored, caption=f"Restored via {restore_method.upper()} (PSNR: {metrics_restored['psnr']} dB | SSIM: {metrics_restored['ssim']})", use_container_width=True)
+            st.image(restored, caption=f"Restored via {restore_method.upper()} (PSNR: {metrics_restored['psnr']} dB | SSIM: {metrics_restored['ssim']})", width="stretch")
 
         st.metric(
             "PSNR Improvement",
@@ -519,9 +519,9 @@ def main():
 
             c1, c2 = st.columns(2)
             with c1:
-                st.image(current_img, caption="Input Scene", use_container_width=True)
+                st.image(current_img, caption="Input Scene", width="stretch")
             with c2:
-                st.image(th_out, caption=f"Segmentation Map: {method}", use_container_width=True)
+                st.image(th_out, caption=f"Segmentation Map: {method}", width="stretch")
 
         with seg_tab2:
             st.write("Detect and classify contours based on Area, Perimeter, and Circularity:")
@@ -535,7 +535,7 @@ def main():
                 cv2.rectangle(annotated, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 cv2.putText(annotated, f"#{idx} C:{item['circularity']}", (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (255, 0, 0), 1)
 
-            st.image(annotated, caption=f"Annotated Contours ({len(data)} detected)", use_container_width=True)
+            st.image(annotated, caption=f"Annotated Contours ({len(data)} detected)", width="stretch")
             st.dataframe(data)
 
         with seg_tab3:
@@ -547,9 +547,9 @@ def main():
             mask, foreground = grabcut_segmentation(current_img, rect=rect, iterations=iters)
             gc1, gc2 = st.columns(2)
             with gc1:
-                st.image(mask, caption="Alpha Matte Mask", use_container_width=True)
+                st.image(mask, caption="Alpha Matte Mask", width="stretch")
             with gc2:
-                st.image(foreground, caption="Extracted Foreground", use_container_width=True)
+                st.image(foreground, caption="Extracted Foreground", width="stretch")
 
     elif selected_module.startswith("9."):
         # Module 9: Features
@@ -562,19 +562,19 @@ def main():
             corner_mask = detect_harris_corners(gray, threshold=thresh)
             vis = current_img.copy()
             vis[corner_mask > 0] = [255, 0, 0]  # Mark corners in Red
-            st.image(vis, caption=f"Harris Corners Detected ({np.count_nonzero(corner_mask)} locations)", use_container_width=True)
+            st.image(vis, caption=f"Harris Corners Detected ({np.count_nonzero(corner_mask)} locations)", width="stretch")
         else:
             n_feat = st.slider("Max Features", 50, 2000, 500, 50)
             kps, des = detect_keypoints(gray, detector_type=det_mode, n_features=n_feat)
             vis = cv2.drawKeypoints(current_img, kps, None, color=(0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-            st.image(vis, caption=f"{det_mode} Keypoints ({len(kps)} extracted)", use_container_width=True)
+            st.image(vis, caption=f"{det_mode} Keypoints ({len(kps)} extracted)", width="stretch")
 
             st.subheader("Feature Matching under Geometric Perturbation")
             # Apply slight rotation & shift to create target image
             M = cv2.getRotationMatrix2D((gray.shape[1] / 2, gray.shape[0] / 2), 15, 1.0)
             transformed = cv2.warpAffine(current_img, M, (current_img.shape[1], current_img.shape[0]))
             match_vis, matches = match_features(current_img, transformed, detector_type=det_mode)
-            st.image(match_vis, caption=f"Matches ({len(matches)} passing Lowe's ratio test)", use_container_width=True)
+            st.image(match_vis, caption=f"Matches ({len(matches)} passing Lowe's ratio test)", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown("""
@@ -594,7 +594,7 @@ def main():
             tx = st.slider("Translate X (pixels)", -100, 100, 0)
             ty = st.slider("Translate Y (pixels)", -100, 100, 0)
             aff_out = affine_transform(current_img, angle=angle, scale=scale, tx=tx, ty=ty)
-            st.image(aff_out, caption="Affine Transformed", use_container_width=True)
+            st.image(aff_out, caption="Affine Transformed", width="stretch")
 
         with trans_tab2:
             st.write("Perspective homography rectification (turning a tilted document into a flat scan):")
@@ -612,9 +612,9 @@ def main():
                 for pt in pts:
                     cv2.circle(annotated, (int(pt[0]), int(pt[1])), 6, (255, 0, 0), -1)
                 cv2.polylines(annotated, [pts.astype(np.int32)], True, (255, 0, 0), 2)
-                st.image(annotated, caption="Quadrilateral ROI", use_container_width=True)
+                st.image(annotated, caption="Quadrilateral ROI", width="stretch")
             with c2:
-                st.image(warped, caption="Rectified Output", use_container_width=True)
+                st.image(warped, caption="Rectified Output", width="stretch")
 
         with trans_tab3:
             st.write("Stitching two overlapping scenes:")
@@ -627,7 +627,7 @@ def main():
                     st.success("Panorama successfully stitched using RANSAC Homography!")
                 else:
                     st.warning("Feature alignment fell back to blended composition.")
-                st.image(stitched, caption="Composite Panorama", use_container_width=True)
+                st.image(stitched, caption="Composite Panorama", width="stretch")
 
     elif selected_module.startswith("11."):
         # Module 11: Video Processing
@@ -648,15 +648,15 @@ def main():
             flow_xy, flow_vis = compute_dense_optical_flow(frames[0], frames[1])
             c1, c2 = st.columns(2)
             with c1:
-                st.image(frames[0], caption="Frame t", use_container_width=True)
+                st.image(frames[0], caption="Frame t", width="stretch")
             with c2:
-                st.image(flow_vis, caption="Motion Vector Field (Farnebäck Color Wheel)", use_container_width=True)
+                st.image(flow_vis, caption="Motion Vector Field (Farnebäck Color Wheel)", width="stretch")
         elif v_mode == "Background Subtraction (MOG2)":
             bg_masks = apply_background_subtraction(frames, method="MOG2")
-            st.image(bg_masks[-1], caption="MOG2 Foreground Mask", use_container_width=True)
+            st.image(bg_masks[-1], caption="MOG2 Foreground Mask", width="stretch")
         else:
             heatmap = generate_motion_heatmap(frames)
-            st.image(heatmap, caption="Cumulative Temporal Motion Heatmap", use_container_width=True)
+            st.image(heatmap, caption="Cumulative Temporal Motion Heatmap", width="stretch")
 
         with st.expander("📖 Qualcomm Architecture & Theoretical Foundations"):
             st.markdown("""
@@ -693,19 +693,19 @@ def main():
         st.subheader("Step-by-Step Hardware ISP Execution Stages")
         cols = st.columns(3)
         with cols[0]:
-            st.image(stages["bayer"], caption="1. Raw Bayer CFA Pattern", use_container_width=True)
+            st.image(stages["bayer"], caption="1. Raw Bayer CFA Pattern", width="stretch")
         with cols[1]:
-            st.image(stages["demosaiced"], caption="2. Debayer / Demosaic", use_container_width=True)
+            st.image(stages["demosaiced"], caption="2. Debayer / Demosaic", width="stretch")
         with cols[2]:
-            st.image(stages["bls"], caption="3. Black Level Corrected", use_container_width=True)
+            st.image(stages["bls"], caption="3. Black Level Corrected", width="stretch")
 
         cols2 = st.columns(3)
         with cols2[0]:
-            st.image(stages["awb"], caption="4. Auto White Balance (AWB)", use_container_width=True)
+            st.image(stages["awb"], caption="4. Auto White Balance (AWB)", width="stretch")
         with cols2[1]:
-            st.image(stages["ccm"], caption="5. Color Correction Matrix (CCM)", use_container_width=True)
+            st.image(stages["ccm"], caption="5. Color Correction Matrix (CCM)", width="stretch")
         with cols2[2]:
-            st.image(stages["final"], caption="6. Tone Mapped & Denoised Output", use_container_width=True)
+            st.image(stages["final"], caption="6. Tone Mapped & Denoised Output", width="stretch")
 
         st.download_button(
             "⬇ Download ISP Pipeline Output",
