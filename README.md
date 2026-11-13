@@ -117,15 +117,9 @@ IPCV/
 │   ├── test_tier4_video_isp.py
 │   └── test_app_integration.py
 │
-├── output_images/              # CLI detector output directories
-│   ├── simple/
-│   ├── rgb/
-│   └── grid/
-│
+├── .streamlit/                 # Web app theme & server config
 ├── app.py                      # Interactive Streamlit Web Application
-├── icon_grid_detector.py       # Standalone CLI icon grid detector
-├── object_detector_simple.py   # Standalone CLI mask detector
-├── object_detector_simple_rgb.py # Standalone CLI RGB detector
-├── requirements.txt            # Project dependencies
+├── packages.txt                # Linux OS packages for cloud deployment
+├── requirements.txt            # Python dependencies
 └── README.md                   # Project documentation
 ```
