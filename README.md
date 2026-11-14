@@ -1,7 +1,6 @@
 # Image Processing & Computer Vision Portfolio — Sourish Musib
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit)](https://image-processing-sourish.streamlit.app)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/sourish-24/image-processing)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)](https://opencv.org/)
 [![Tests](https://img.shields.io/badge/Tests-51%20Passed-brightgreen?style=for-the-badge)](https://github.com/sourish-24/image-processing)
@@ -12,7 +11,7 @@ A comprehensive classical image processing and computer vision toolkit engineere
 
 ---
 
-## 🌟 Visual Transformations & Algorithm Showcases
+## Visual Transformations & Algorithm Showcases
 
 ### 1. Hardware Camera ISP Pipeline Simulation
 Simulates the silicon signal processing pipeline inside a digital camera sensor: raw Bayer mosaic readout $\to$ Bilinear Demosaicing $\to$ Black Level Calibration (BLC) $\to$ Gray-World Auto White Balance (AWB) $\to$ Color Correction Matrix (CCM) $\to$ Tone Curve Mapping.
@@ -70,7 +69,7 @@ Frame-by-frame temporal motion analysis computing dense optical flow vector fiel
 
 ---
 
-## 📐 Progressive 4-Tier Architecture
+## Progressive 4-Tier Architecture
 
 | Tier | Module | Topic | Core Algorithms & Formulas |
 | :--- | :--- | :--- | :--- |
@@ -110,7 +109,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Running the Interactive Application
+## Running the Interactive Application
 
 Launch the Streamlit web dashboard locally:
 ```powershell
@@ -123,7 +122,7 @@ streamlit run app.py
 
 ---
 
-## 🧪 Running the Automated Test Suite
+## Running the Automated Test Suite
 
 All algorithms and pipelines are covered by automated unit and integration tests:
 
